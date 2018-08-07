@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MemoryCard from '../MemoryCard';
-import '../MemoryGame.css';
+import './style.css';
+import { Container, Row, Col } from 'reactstrap';
 
 class MemoryGame extends Component {
   constructor(props) {
@@ -78,13 +79,19 @@ class MemoryGame extends Component {
       }
       return array
     }
-    render(){
-      
-      return (
+    render(){ 
+      return (     
         <div className="memory-game">
             {this.state.finalizedCards.map((cards, index) => {
-                return <MemoryCard cards={cards.name} click={() => {this.handleClick(cards.name,index)}} close={cards.close} complete={cards.complete}/>
-              })}
+              return 
+                // <Container>
+                //   <Row> 
+                //     <Col sm="6">
+                      <MemoryCard cards={cards.name} click={() => {this.handleClick(cards.name,index)}} close={cards.close} complete={cards.complete}/>
+                //     </Col>
+                //   </Row>
+                // </Container>
+             })}
         </div>
       )
     }

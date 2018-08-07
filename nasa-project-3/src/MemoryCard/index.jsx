@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../MemoryGame.css';
+//import './MemoryGame.css';
 
 class MemoryCard extends Component {
   constructor(props) {
