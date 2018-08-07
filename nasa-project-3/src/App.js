@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Button } from 'reactstrap';
 import NasaApi from './NasaApi';
-import GameContainer from './GameContainer';
+import MemoryGame from './MemoryGame';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <NasaApi/>
+        <div><MemoryGame/></div>
+        <br></br>
+        <br></br>
+        <div><NasaApi/></div>
+        
       </div>
     );
   }

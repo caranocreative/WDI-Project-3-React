@@ -36,9 +36,12 @@ class NasaApi extends Component {
   render() {   
     return (
       <div>
-        <h1 class="POD-h1">Space Fun</h1>
-        <h3 class="POD-h3">NASA Picture of the Day!</h3>
-        <img class="POD" src={this.state.url}/>
+        <h1 className="POD-h1">Space Fun</h1>
+        <h3 className="POD-h3">NASA Picture of the Day!</h3>
+        <img className="POD" src={this.state.url} alt=""/>
+        
+        
+        
       </div>
     );
   }
