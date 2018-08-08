@@ -7,9 +7,7 @@ class MemoryCards {
   }
 
   generateCardSet() {
-    //
-    // Generate a set of cards with image pairs
-    //
+   
     this.cards = [];
     let id=1;
     for(let i=1; i <= this.NUM_IMAGES; i++) {

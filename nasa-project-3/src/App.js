@@ -4,7 +4,7 @@ import NasaApi from './NasaApi';
 import Game from './Game/Game';
 import NavbarComponent from './NavbarComponent/Navbar';
 import Login from './Login/index';
-
+import SpacePictures from './SpacePictures/index';
 
 
 
@@ -16,6 +16,7 @@ class App extends Component {
         <div><Login/></div>
         <div><Game/></div>
         <div><NasaApi/></div>
+        <div><SpacePictures/></div>
         
         
       

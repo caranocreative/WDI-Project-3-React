@@ -59,7 +59,7 @@ class SpacePictures extends Component {
         });
         console.log('inside try')
         const deletePictureJson = await deletePicture.json();
-        this.setState({picture: this.state.savedPicture.filter((picture, i) => savedPicture._id !== id)});
+        this.setState({picture: this.state.savePicture.filter((picture, i) => savePicture._id !== id)});
     } catch(err) {
       console.log(err, ' error')
     }
@@ -74,7 +74,7 @@ class SpacePictures extends Component {
         headers:{
           'Content-Type': 'application/json'
         }
-      });c
+      });
 
       const editResponseJson = await editResponse.json();
       const editedCommentsArray = this.state.sharedPicture.map((comment) => {
