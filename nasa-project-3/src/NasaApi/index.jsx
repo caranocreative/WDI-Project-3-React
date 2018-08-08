@@ -82,7 +82,7 @@ class NasaApi extends Component {
         <h3 className="POD-h3">NASA Picture of the Day!</h3>
         <iframe className="POD" src={this.state.url} alt=""></iframe>
         
-        <h2>Like picture</h2>
+        <h2>Like the Picture of the day</h2>
         <form onSubmit={this.addPicture}>
           <input type='hidden' name='url' value={this.state.url}/>
           <input type='hidden' name='explanation' value={this.state.explanation}/>
@@ -91,11 +91,18 @@ class NasaApi extends Component {
           <input type='submit' value='Like'/>
         </form>
         
-        
         <h2>Add your comments</h2>
         <form onSubmit={this.comment}>                                                                                          
-          <textarea onChange={this.comment} />        
-            <input type='submit' value='Add Comment'/>
+          <textarea onChange={this.comment}/> 
+          <br/>       
+          <input type='submit' value='Add Comment'/>
+          <div>
+          <br/>
+          <h2>Review Comments</h2>
+          <span>need to loop through comments and list all comments here...{this.comment}</span>
+          <br/>
+          <input type='submit' value='Delete Comment'/>
+          </div>
         </form>
        
 
