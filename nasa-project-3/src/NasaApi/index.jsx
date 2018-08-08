@@ -8,10 +8,11 @@ class NasaApi extends Component {
     super(props);
 
     this.state = {
-      url: [],
+      url: '',
       explanation: '',
       date: '',
-      title: ''
+      title: '',
+      comment: [],
     };
   }
   
@@ -24,28 +25,52 @@ class NasaApi extends Component {
       
     } catch(err) {
       return err;
-      //console.log(err, ' error in catch block')
+      console.log(err, ' error in catch block')
     }
   }
+  
   addPicture = async (e) => {
     e.preventDefault();
+    // console.log(this.state.url);
+    // console.log("ADDING A PICTURE");
     try {
-        const createdPicture = await fetch('http://localhost:9000/api/v1/pictures/new', {
+      // const imageToCreate = {"imageUrl":  this.state.url};
+      const createdPicture = await fetch('http://localhost:9000/api/v1/pictures/new', {
           method: 'POST',
-          body: JSON.stringify(this.state.url),
+          body: JSON.stringify(this.state),
           headers:{
             'Content-Type': 'application/json'
           }
         });
-        
+
     } catch(err) {
       console.log(err)
     }
   }
+  // handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const nasaApiData = await fetch('http://localhost:9000/api/v1/pictures', {
+  //       method: 'POST',
+  //         body: JSON.stringify(this.state.url),
+  //         headers:{
+  //           'Content-Type': 'application/json'
+  //         }
+  //     })
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }  
   componentDidMount(){
     this.nasaPicOfDay().then((data) => {
       console.log(data, ' this is data');
-      this.setState({url: data.url});
+      this.setState({
+        url: data.url,
+        explanation: data.explanation,
+        date: data.date,
+        title: data.title,
+        
+      });
     });
   }
   render(props) {   
@@ -57,11 +82,23 @@ class NasaApi extends Component {
         <h3 className="POD-h3">NASA Picture of the Day!</h3>
         <iframe className="POD" src={this.state.url} alt=""></iframe>
         
-        <form onSubmit={this.props.addPicture}>
+        <h2>Like picture</h2>
+        <form onSubmit={this.addPicture}>
           <input type='hidden' name='url' value={this.state.url}/>
+          <input type='hidden' name='explanation' value={this.state.explanation}/>
+          <input type='hidden' name='title' value={this.state.title}/>
+          <input type='hidden' name='date' value={this.state.date}/>
           <input type='submit' value='Like'/>
         </form>
         
+        
+        <h2>Add your comments</h2>
+        <form onSubmit={this.comment}>                                                                                          
+          <textarea onChange={this.comment} />        
+            <input type='submit' value='Add Comment'/>
+        </form>
+       
+
       </div>
       </div>
       </div>
