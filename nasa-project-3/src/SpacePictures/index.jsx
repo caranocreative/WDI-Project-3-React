@@ -124,8 +124,8 @@ class SpacePictures extends Component {
     console.log(this.state)
     return (
       <div>
-        <addPicture image={this.state.savePicture} deleteImage={this.deleteImage}/>
-        <CreatePicture addPicture={this.state.savePicture}/>
+  
+        <addPicture addPicture={this.state.savePicture}/>
         <Comments closeAndEdit={this.closeAndEdit} handleFormChange={this.handleFormChange} commentsToEdit={this.state.commentsToEdit}/>
         <DeletePicture deletePicture={this.deletePicture} handleFormChange={this.handleFormChange} />
       </div>
