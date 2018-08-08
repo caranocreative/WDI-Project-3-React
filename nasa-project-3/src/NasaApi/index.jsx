@@ -41,7 +41,9 @@ class NasaApi extends Component {
         <h1 className="POD-h1">Space Fun</h1>
         <h3 className="POD-h3">NASA Picture of the Day!</h3>
         <img className="POD" src={this.state.url} alt=""/>
-        <button onClick=></button>
+        
+        
+        <button className="saveBtn" onChange={this.props.handleFormChange}>LIKE</button>
         
         
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
-// use spacePicture 
+import Comments from '../Comments/comments';
+import CreatePicture from '../CreatePicture/createPicture';
+import DeletePicture from '../DeletePicture/delete';
 
 class SpacePictures extends Component {
   constructor(){
@@ -58,8 +59,8 @@ class SpacePictures extends Component {
           method: 'DELETE'
         });
         console.log('inside try')
-        const deletePictureJson = await deletePicture.json();
-        this.setState({picture: this.state.savePicture.filter((picture, i) => savePicture._id !== id)});
+        // const deletePictureJson = await deletePicture.json();
+        // this.setState({url: this.state.savePicture.filter((picture, i) => savePicture._id !== id)});
     } catch(err) {
       console.log(err, ' error')
     }
@@ -75,20 +76,20 @@ class SpacePictures extends Component {
           'Content-Type': 'application/json'
         }
       });
+      
+      // const editResponseJson = await editResponse.json();
+     
+      // const editedCommentsArray = this.state.sharedPicture.map((_comment) => { 
+      //         if(comments._id === this.state.editPictureId){
 
-      const editResponseJson = await editResponse.json();
-      const editedCommentsArray = this.state.sharedPicture.map((comment) => {
-
-              if(comments._id === this.state.editPictureId){
-
-                picture.comment = editResponseJson.data.comment;
+      //           picture.comment = editResponseJson.data.comment;
                 
-              }
+      //         }
 
-              return comment
-      });
+      //         return comments
+      // });
        this.setState({
-        pictures: editedCommentsArray,
+        // pictures: editedCommentsArray,
         showEdit: false
        });
     } catch(err) {
@@ -109,10 +110,10 @@ class SpacePictures extends Component {
     console.log(this.state)
     return (
       <div>
-        <SavePicture image={this.state.picture} deleteImage={this.deleteImage}/>
-        <CreatePicture addImage={this.addPicture}/>
-        {this.state.showEdit ? <EditComments closeAndEdit={this.closeAndEdit} handleFormChange={this.handleFormChange} commentsToEdit={this.state.commentsToEdit}/> : null}
-
+        <addPicture image={this.state.savePicture} deleteImage={this.deleteImage}/>
+        <CreatePicture addPicture={this.state.savePicture}/>
+        <Comments closeAndEdit={this.closeAndEdit} handleFormChange={this.handleFormChange} commentsToEdit={this.state.commentsToEdit}/>
+        <DeletePicture deletePicture={this.deletePicture} handleFormChange={this.handleFormChange} />
       </div>
       )
   }
