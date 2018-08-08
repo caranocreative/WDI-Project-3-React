@@ -28,7 +28,7 @@ class SpacePictures extends Component {
   }
   getPicture = async () => {
 
-    const picture = await fetch('http://localhost:9000/api/v1/picture/id');
+    const picture = await fetch('http://localhost:9000/api/v1/pictures/id');
     const pictureJson = await picture.json();
     return pictureJson
 
@@ -36,7 +36,7 @@ class SpacePictures extends Component {
   addPicture = async (picture, e) => {
     e.preventDefault();
     try {
-        const createdPicture = await fetch('http://localhost:9000/api/v1/picture/id', {
+        const createdPicture = await fetch('http://localhost:9000/api/v1/pictures/id', {
           method: 'POST',
           body: JSON.stringify(picture),
           headers:{
@@ -69,7 +69,7 @@ class SpacePictures extends Component {
   closeAndEdit = async (e) => {
     e.preventDefault();
     try {
-      const editResponse = await fetch('http://localhost:9000/api/v1/picture/id' + this.state.editPictureId, {
+      const editResponse = await fetch('http://localhost:9000/api/v1/pictures/id' + this.state.editPictureId, {
         method: 'PUT',
         body: JSON.stringify(this.state.pictureToEdit),
         headers:{
@@ -97,6 +97,20 @@ class SpacePictures extends Component {
     }
 
   }
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const nasaApiData = await fetch('http://localhost:9000/api/v1/pictures', {
+        method: 'POST',
+          body: JSON.stringify(this.state.url),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }  
   handleFormChange = (e) => {
 
     this.setState({

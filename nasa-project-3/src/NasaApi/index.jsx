@@ -4,8 +4,8 @@ import './style.css';
 
 
 class NasaApi extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.state = {
       url: [],
@@ -40,11 +40,12 @@ class NasaApi extends Component {
       <div>
         <h1 className="POD-h1">Space Fun</h1>
         <h3 className="POD-h3">NASA Picture of the Day!</h3>
-        <img className="POD" src={this.state.url} alt=""/>
+        <iframe className="POD" src={this.state.url} alt=""></iframe>
         
-        
-        <button className="saveBtn" onChange={this.props.handleFormChange}>LIKE</button>
-        
+        <form onSubmit={this.props.handleSubmit}>
+          <input type='hidden' name='url' value={this.state.url} onChange={this.props.addPicture}/>
+          <input type='submit' value='Like'/>
+        </form>
         
       </div>
       </div>
