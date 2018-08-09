@@ -13,6 +13,7 @@ class NasaApi extends Component {
       date: '',
       title: '',
       comment: [],
+      id: '',
     };
   }
   
@@ -30,19 +31,24 @@ class NasaApi extends Component {
   }
   
   addPicture = async (e) => {
+   //console.log("add new comment");
     e.preventDefault();
     // console.log(this.state.url);
     // console.log("ADDING A PICTURE");
     try {
       // const imageToCreate = {"imageUrl":  this.state.url};
-      const createdPicture = await fetch('http://localhost:9000/api/v1/pictures/new', {
+      const createdPicture = await fetch('http://localhost:9000/api/v1/pictures', {
           method: 'POST',
           body: JSON.stringify(this.state),
           headers:{
             'Content-Type': 'application/json'
           }
         });
-
+        const data = await createdPicture.json()
+        this.setState({
+          id: data.data._id
+        }) 
+        console.log(data.data._id);
     } catch(err) {
       console.log(err)
     }
@@ -61,11 +67,11 @@ class NasaApi extends Component {
   //     console.log(err)
   //   }
   // }
-  newCommentEdit = async (e) => {
+  addNewComment = async (id, e) => {
     console.log('inside function');
     e.preventDefault();
     try {
-      const editCommentsArray = await fetch('http://localhost:9000/api/v1/pictures/id', {
+      const addToCommentsArray = await fetch('http://localhost:9000/api/v1/pictures/' + id, {
         method: 'PUT',
         body: JSON.stringify(this.state),
         headers:{
@@ -82,7 +88,16 @@ class NasaApi extends Component {
     } catch(err) {
       console.log(err);
     }
-  }  
+  } 
+  handleFormChange = (e) => {
+
+    this.setState({
+      
+    
+        [e.target.name]: e.target.value
+    
+    })
+  } 
   componentDidMount(){
     this.nasaPicOfDay().then((data) => {
       console.log(data, ' this is data');
@@ -110,13 +125,15 @@ class NasaApi extends Component {
    }
     
     return (
+      <div className="mainContainer"> 
       <div className="row">
       <div className="side">
       <div>
+        <div className="POD-main">
         <h1 className="POD-h1">Out of this World Space Fun</h1>
         <h3 className="POD-h3">NASA Picture of the Day!</h3>
         <iframe className="POD" src={this.state.url} alt=""></iframe>
-        
+        </div>
         <h2>Like the Picture of the day</h2>
         <form onSubmit={this.addPicture}>
           <input type='hidden' name='url' value={this.state.url}/>
@@ -127,8 +144,8 @@ class NasaApi extends Component {
         </form>
         
         <h2>Add your comments</h2>
-        <form onSubmit={this.newCommentEdit}>                                                                                          
-          <textarea name='comment'/> 
+        <form onSubmit={this.addNewComment}>                                                                                          
+          <textarea name='comment' onChange={this.handleFormChange} /> 
           <br/>       
           <input type='submit' value='Add Comment'/>
           <div>
@@ -141,6 +158,7 @@ class NasaApi extends Component {
           {s}     
              
          
+      </div>
       </div>
       </div>
       </div>
