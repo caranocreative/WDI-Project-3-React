@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
-
+import EditComment from '../EditComment/editComment';
 
 
 class NasaApi extends Component {
@@ -15,6 +15,8 @@ class NasaApi extends Component {
       comment: [],
       comments: [],
       id: '',
+      showEdit: false,
+      commentToEdit: [],
     };
   }
   
@@ -81,9 +83,39 @@ class NasaApi extends Component {
       //   }
       //     return editCommentsArray
       // })
+
+      this.setState({
+        comment: this.comments,
+        showEdit: false,
+       });
+
     } catch(err) {
       console.log(err);
     }
+  }
+  deleteComment = async (id, e) => {
+    console.log(id, ' this is id')
+    e.preventDefault();
+    try {
+        const deleteComment = await fetch('http://localhost:9000/api/v1/pictures/' + id, {
+          method: 'DELETE'
+        });
+        console.log('inside try')
+        const deleteCommentJson = await deleteComment.json();
+        this.setState({comments: this.state.comments.filter((comments, i) => comments._id !== id)});
+    } catch(err) {
+      console.log(err, ' error')
+    }
+  }
+  showModal = (id, e) => {
+    // i comes before e, when called with bind
+    const commentToEdit = this.state.comments.find((comment) => comment._id === id)
+    console.log(commentToEdit, ' commentToEdit')
+    this.setState({
+      commentToEdit: commentToEdit,
+      showEdit: true,
+
+    });
   } 
   handleFormChange = (e) => {
 
@@ -122,9 +154,9 @@ class NasaApi extends Component {
       return (
         <li key={comment._id}>
         {/* <img src={comment.url} alt=""/> */}
-          <p>{comment.comment}</p><br/>
-          {/* <button onClick={props.deleteComment.bind(null, comment._id)}>Delete</button> */}
-          {/* <button onClick={props.showModal.bind(null, comment._id)}>Edit</button> */}
+          <p>{comment.comment}</p>
+          <button onClick={this.deleteComment.bind(null, comment._id)}>Delete</button>
+          <button onClick={this.showModal.bind(null, comment._id)}>Edit</button>
       </li>)
     })
  
@@ -150,6 +182,8 @@ class NasaApi extends Component {
                {comments}
               </ul>
           </div>
+          {this.state.showEdit ? <EditComment editComment={this.editComment} handleFormChange={this.handleFormChange} commentToEdit={this.state.commentToEdit}/> : null}
+
       </div>
      
     );
