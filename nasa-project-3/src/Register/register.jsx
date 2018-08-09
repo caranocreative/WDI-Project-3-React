@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, NavItem, NavLink, Form, FormGroup, Label, Input } from 'reactstrap';
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,11 +23,11 @@ class Login extends React.Component {
     return (
       <div>
         <NavItem>
-          <Button color="link" onClick={this.toggle}>Login</Button>
+          <Button color="link" onClick={this.toggle}>Register</Button>
         </NavItem>
         <Modal isOpen={this.state.modal} modalTransition={{ timeout: 400 }} backdropTransition={{ timeout: 700 }}
           toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Login</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Register</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.props.handleSubmit} inline>
               <FormGroup>
@@ -40,7 +40,7 @@ class Login extends React.Component {
                 <Input type="password" name="password" id="examplePassword" onChange={this.props.handleChange} placeholder="Password" />
               </FormGroup>
               {' '}
-              <Button onClick={this.toggle}>Login</Button>
+              <Button onClick={this.toggle}>Register</Button>
             </Form>
           </ModalBody>
         </Modal>
@@ -49,4 +49,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Register;

@@ -60,7 +60,29 @@ class NasaApi extends Component {
   //   } catch (err) {
   //     console.log(err)
   //   }
-  // }  
+  // }
+  newCommentEdit = async (e) => {
+    console.log('inside function');
+    e.preventDefault();
+    try {
+      const editCommentsArray = await fetch('http://localhost:9000/api/v1/pictures/id', {
+        method: 'PUT',
+        body: JSON.stringify(this.state),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      });
+      // const editResponseJson = await editResponse.json();
+      // const editCommentsArray = this.comment.map((_comment) => { 
+      //   if(this.comment.id === this.state){
+      //     this.comment = editResponseJson.data.comment;   
+      //   }
+      //     return editCommentsArray
+      // })
+    } catch(err) {
+      console.log(err);
+    }
+  }  
   componentDidMount(){
     this.nasaPicOfDay().then((data) => {
       console.log(data, ' this is data');
@@ -73,12 +95,25 @@ class NasaApi extends Component {
       });
     });
   }
+  
+  
+  //like the picture of the day works
   render(props) {   
+    let s = "";
+    for(let i = 0; i < this.state.comment.length; i++)  {
+      s += `
+      <form>
+        <textarea value={this.state.comment[i]}/>
+        <input type='submit' value='Edit Comment'/>
+        <input type='submit' value='Delete Comment'/>
+      </form>`
+   }
+    
     return (
       <div className="row">
       <div className="side">
       <div>
-        <h1 className="POD-h1">Space Fun</h1>
+        <h1 className="POD-h1">Out of this World Space Fun</h1>
         <h3 className="POD-h3">NASA Picture of the Day!</h3>
         <iframe className="POD" src={this.state.url} alt=""></iframe>
         
@@ -92,20 +127,20 @@ class NasaApi extends Component {
         </form>
         
         <h2>Add your comments</h2>
-        <form onSubmit={this.comment}>                                                                                          
-          <textarea onChange={this.comment}/> 
+        <form onSubmit={this.newCommentEdit}>                                                                                          
+          <textarea name='comment'/> 
           <br/>       
           <input type='submit' value='Add Comment'/>
           <div>
           <br/>
-          <h2>Review Comments</h2>
-          <span>need to loop through comments and list all comments here...{this.comment}</span>
-          <br/>
-          <input type='submit' value='Delete Comment'/>
           </div>
         </form>
-       
 
+          
+          <h2>Review Comments</h2>
+          {s}     
+             
+         
       </div>
       </div>
       </div>

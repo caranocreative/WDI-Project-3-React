@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-import Comments from '../Comments/comments';
-import CreatePicture from '../CreatePicture/createPicture';
-import DeletePicture from '../DeletePicture/delete';
+
 
 class SpacePictures extends Component {
   constructor(){
@@ -133,4 +130,3 @@ class SpacePictures extends Component {
   }
 }
 
-export default SpacePictures;
