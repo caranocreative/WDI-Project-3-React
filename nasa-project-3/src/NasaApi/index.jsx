@@ -13,6 +13,7 @@ class NasaApi extends Component {
       date: '',
       title: '',
       comment: [],
+      comments: [],
       id: '',
     };
   }
@@ -96,85 +97,61 @@ class NasaApi extends Component {
   componentDidMount(){
     this.nasaPicOfDay().then((data) => {
       console.log(data, ' this is data');
-      this.setState({
-        url: data.url,
-        explanation: data.explanation,
-        date: data.date,
-        title: data.title,
-        comment: data.comment,
-        id: data.id,
-        
-      });
+      this.getComments().then((comments)=>{
+        console.log("THIS IS COMMENTS")
+        console.log(comments);
+        this.setState({
+          url: data.url,
+          explanation: data.explanation,
+          date: data.date,
+          title: data.title,
+          comment: data.comment,
+          id: data.id,
+          comments: comments.data,
+        });
+      })
+      
     });
   }
   
   
   //like the picture of the day works
   render(props) {   
-  //   let s = "";
-  //   for(let i = 0; i < this.state.getComments.length; i++)  {
-  //     s += `
-  //     <form>
-  //       <textarea value={this.state.comment[i]}/>
-  //       <input type='submit' value='Edit Comment'/>
-  //       <input type='submit' value='Delete Comment'/>
-  //     </form>`
-  //  }
-    
+    console.log(this.state.comments);
+    const comments = this.state.comments.map((comment)=>{
+      return (
+        <li key={comment._id}>
+        {/* <img src={comment.url} alt=""/> */}
+          <p>{comment.comment}</p><br/>
+          {/* <button onClick={props.deleteComment.bind(null, comment._id)}>Delete</button> */}
+          {/* <button onClick={props.showModal.bind(null, comment._id)}>Edit</button> */}
+      </li>)
+    })
+ 
     return (
-      <div className="mainContainer"> 
-      <div className="row">
-      <div className="side">
-        
-        <div>
+
+      <div>
         <div className="POD-main">
-        <h1 className="POD-h1">Out of this World Space Fun</h1>
-        <h3 className="POD-h3">NASA Picture of the Day!</h3>
-        <iframe className="POD" src={this.state.url} alt=""></iframe>
+          <h1 className="POD-h1">Out of this World Space Fun</h1>
+          <h3 className="POD-h3">NASA Picture of the Day!</h3>
+          <iframe className="POD" src={this.state.url} alt=""></iframe>
         </div>
-        
-        {/* <div>
-          <h2>Like the Picture of the day</h2>
-          <form onSubmit={this.addPicture}>
-            <input type='hidden' name='url' value={this.state.url}/>
-            <input type='hidden' name='explanation' value={this.state.explanation}/>
-            <input type='hidden' name='title' value={this.state.title}/>
-            <input type='hidden' name='date' value={this.state.date}/>
-            <input type='submit' value='Like'/>
-          </form>
-        </div> */}
-        
-        <br/>
-        
         <div>
           <h2>Add your comments</h2>
           <form onSubmit={this.addComment}>                                                                                          
             <textarea name='comment' onChange={this.handleFormChange} /> 
             <br/>       
             <input type='submit' value='Add Comment'/>
-            <div>
-            <br/>
-            </div>
           </form>
         </div>
-          
-          {/* <div>
-            <h2>Review Comments</h2>
-            {s}     
-          </div>  */}
-         
          <div>
            <h2>COMMENTS</h2>
-          <div >
-
+              <ul>
+               {comments}
+              </ul>
           </div>
-        </div>
-
-
       </div>
-      </div>
-      </div>
-      </div>
+     
     );
   }
 }
