@@ -154,7 +154,7 @@ class NasaApi extends Component {
     console.log(this.state.comments);
     const comments = this.state.comments.map((comment)=>{
       return (
-        <li key={comment._id}>
+        <li className="list" key={comment._id}>
         {/* <img src={comment.url} alt=""/> */}
           <p>{comment.comment}</p>
           <button onClick={this.deleteComment.bind(null, comment._id)}>Delete</button>
@@ -165,13 +165,20 @@ class NasaApi extends Component {
     return (
 
       <div>
+        <br/>
+        <br/>
+        <br/>
         <div className="POD-main">
-          <h1 className="POD-h1">Out of this World Space Fun</h1>
-          <h3 className="POD-h3">NASA Picture of the Day!</h3>
+          <h1 className="POD-h1" >NASA Picture of the Day!</h1>
+          <h3 className="POD-h3"></h3>
           <iframe className="POD" src={this.state.url} alt=""></iframe>
+          <h4 className="POD-h4">{this.state.title}</h4>
+         
+          <p className="POD-p">{this.state.explanation}</p>
+          <br/>
         </div>
         <div>
-          <h2>Add your comments</h2>
+          <h2 className="POD-h2">Add your comments</h2>
           <form onSubmit={this.addComment}>                                                                                          
             <textarea name='comment' onChange={this.handleFormChange} /> 
             <br/>       
@@ -179,9 +186,11 @@ class NasaApi extends Component {
           </form>
         </div>
          <div>
-           <h2>COMMENTS</h2>
-              <ul>
-               {comments}
+           <br/>
+           <br/>
+           <h2 className="POD-h2">Comments</h2>
+              <ul className="unordered">
+                {comments}
               </ul>
           </div>
           {this.state.showEdit ? <EditComment editComment={this.editComment} handleFormChange={this.handleFormChange} commentToEdit={this.state.commentToEdit}/> : null}

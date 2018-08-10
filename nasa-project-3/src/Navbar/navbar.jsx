@@ -29,7 +29,7 @@ export default class NavbarComponent extends React.Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/">reactstrap</NavbarBrand>
+                    <NavbarBrand href="/" image-src="/public/images" >🚀 Out of this World Space Fun!</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>

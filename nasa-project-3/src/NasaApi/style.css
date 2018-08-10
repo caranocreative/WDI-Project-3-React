@@ -1,6 +1,7 @@
 .POD {
     width: 800px;
     height: 600px;
+    color: white;
    
 }
 /* .POD-main {
@@ -9,11 +10,18 @@
 } */
 .POD-h1 {
     font-family: 'Orbitron', sans-serif;
+    color: white;
     
 }
-
+.POD-h2 {
+    color: white;
+}
 .POD-h3 {
     font-family: 'Orbitron', sans-serif;
+    color: white;
+}
+.POD-h4 {
+    color: white;
 }
 .row {  
     display: flex;
@@ -29,4 +37,24 @@
     /* background-color: rgb(59, 47, 66); */
     padding: 20px;
     
+}
+textarea {
+    width: 600px;
+    height: 150px;
+  }
+.unordered {
+    text-align: center;
+    list-style: none;
+    color: white;
+    
+  }
+.list {
+    border: double;
+    margin: 30px;
+    text-align: center;
+    color: white;
+}  
+.POD-p {
+    margin: 30px;
+    color: white;
 }

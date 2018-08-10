@@ -2,8 +2,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #211e21;
-  /* background-image: url(/images/background.png);
-  background-position: center;
-  background-repeat: inherit; */
+ 
+  
+  background-image: url(/images/moon.jpg);
+  background-position: stretch;
+  background-repeat: inherit;
+  background-color: rgb(179, 218, 255);
 }

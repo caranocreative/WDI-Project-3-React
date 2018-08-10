@@ -116,7 +116,7 @@ class Game extends Component {
     return (
       <div className='Game'>
         <header className='Game-header'>
-          <div className='Game-title'>MEMORY GAME</div>
+          <div className='Game-title'>SPACE MEMORY GAME</div>
         </header>
         <div>
           {gameStatus}

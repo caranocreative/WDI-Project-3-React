@@ -1,6 +1,6 @@
 .Game {
   text-align: center;
-  background-color: #211e21;
+  /* background-color: #211e21; */
   
 }
 
@@ -8,19 +8,20 @@
   /* background-color: #222; */
   height: 50px;
   padding: 20px;
-  color: white;
+  color: solid rgb(253, 253, 253);
 }
 
 .Game-title {
   font-size: 3em;
   font-family: 'Raleway', sans-serif;
+  color: white;
 }
 
 .Game-status {
   padding: 20px;
   font-size: 2em;
   font-family: 'Raleway', sans-serif;
-  color: white;  
+  color: white; 
 }
 
 .Game-intro {
@@ -30,8 +31,8 @@
 .Card {
   display: inline-block;
   border-color: white;
-  border-width: 5px;
-  border-style: solid;
+  border-width: 7px;
+  border-style: groove;
   margin-bottom: 10px;      
   margin-left: 10px;  
   width: 100px;    
@@ -43,6 +44,12 @@
 
 .CardContainer {
   display: inline-block;
-  max-width: 950px;
+  max-width: 650px;
   margin: '20px auto';
+  
+  
+  
+}
+body {
+  background-color: darkslategrey;
 }
