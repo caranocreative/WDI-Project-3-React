@@ -16,6 +16,7 @@ class NasaApi extends Component {
       comments: [],
       id: '',
       showEdit: false,
+      editCommentId: null,
       commentToEdit: [],
     };
   }
@@ -51,7 +52,7 @@ class NasaApi extends Component {
         this.setState({
           id: data.data._id
         }) 
-        console.log(data.data._id);
+        console.log(data.data._id );
     } catch(err) {
       console.log(err)
     }
@@ -65,13 +66,13 @@ class NasaApi extends Component {
 
   }
 
- editComment = async (id, e) => {
+ editComment = async (e) => {
     console.log('inside function');
     e.preventDefault();
     try {
-      const addToCommentsArray = await fetch('http://localhost:9000/api/v1/pictures/' + id, {
+      const addToCommentsArray = await fetch('http://localhost:9000/api/v1/pictures/' + this.state.editCommentId, {
         method: 'PUT',
-        body: JSON.stringify(this.state),
+        body: JSON.stringify(this.state.editCommentId),
         headers:{
           'Content-Type': 'application/json'
         }
@@ -85,8 +86,9 @@ class NasaApi extends Component {
       // })
 
       this.setState({
-        comment: this.comments,
+        commentToEdit: this.comments,
         showEdit: false,
+        
        });
 
     } catch(err) {
@@ -109,28 +111,28 @@ class NasaApi extends Component {
   }
   showModal = (id, e) => {
     // i comes before e, when called with bind
-    const commentToEdit = this.state.comments.find((comment) => comment._id === id)
-    console.log(commentToEdit, ' commentToEdit')
+    let commentToEdit = this.state.comments.find((comment) => comment._id === id)
+    commentToEdit = commentToEdit.comment;
+    console.log('comment to edit start ', commentToEdit, ' commentToEdit');
     this.setState({
       commentToEdit: commentToEdit,
       showEdit: true,
+      editCommentId: id,
 
     });
   } 
   handleFormChange = (e) => {
 
-    this.setState({
-      
-    
+    this.setState({  
         [e.target.name]: e.target.value
     
     })
   } 
   componentDidMount(){
     this.nasaPicOfDay().then((data) => {
-      console.log(data, ' this is data');
+      //console.log(data, ' this is data');
       this.getComments().then((comments)=>{
-        console.log("THIS IS COMMENTS")
+        //console.log("THIS IS COMMENTS")
         console.log(comments);
         this.setState({
           url: data.url,

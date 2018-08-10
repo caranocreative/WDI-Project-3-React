@@ -7,10 +7,9 @@ const editComment = (props) =>  {
     <div>
       <h4> Edit Comment</h4>
       <form onSubmit={props.editComment}>
-        <label>
-          Add comments below:                                                                                              
-          <textarea value={props.commentToEdit} onChange={props.handleChange} />        
-        </label>
+                                                                                                    
+          <textarea name="commentToEdit" type="text" value={props.commentToEdit} onChange={props.handleFormChange} />      
+          <br/>
         <input type='submit' value='Submit' />
       </form>
     </div>
