@@ -117,6 +117,7 @@ class Game extends Component {
       <div className='Game'>
         <header className='Game-header'>
           <div className='Game-title'>SPACE MEMORY GAME</div>
+            
         </header>
         <div>
           {gameStatus}
